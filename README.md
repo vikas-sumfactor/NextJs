@@ -35,6 +35,25 @@ Edit pages/index.js and see the updated result in your browser
 
 
 
+# CSS Modules
+
+1)global.css: applicable for whole application.
+
+2)filename.moudle.css
+
+Next.js has built-in support for CSS Modules using the filename.module.css extension.
+
+CSS Modules locally scope CSS by automatically creating a unique class name. This allows you to use the same class name in different files without worrying about collisions.
+
+
+syntax : 
+<div className={style.classname}>hello world</div>
+called as a object className={style.classname}
+
+
+
+
+
 
 
 
