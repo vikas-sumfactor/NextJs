@@ -79,7 +79,8 @@
 
 .upvoteButton {
   width: fit-content;
-  color: var(--text-white-100);
+  color: var(--text-red-100); 
+  
   margin-top: 1rem /* 16px */;
   margin-bottom: 1rem /* 16px */;
   padding-left: 0.5rem /* 8px */;
