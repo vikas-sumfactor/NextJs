@@ -88,9 +88,9 @@
   padding-top: 0.5rem /* 8px */;
   padding-bottom: 0.5rem /* 8px */;
 
-  background-color: var(--text-purple-dark);
+  background-color: var(--text-red-dark);
   cursor: pointer;
-  color: white;
+  color: rgb(221, 29, 29);
   outline: 0;
   border: 0px;
 

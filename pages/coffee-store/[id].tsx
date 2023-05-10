@@ -12,12 +12,12 @@ import { fetchCoffeeStores } from "@/lib/coffe-stores";
 
 export async function getStaticProps(staticProps:any) {
   const params = staticProps.params;
-  console.log("params", params);
+  console.log("hi params", params);
   const coffeeStores = await fetchCoffeeStores();
   return {
     props: {
       coffeeStore: coffeeStores.find((coffeeStore:any) => {
-        return coffeeStore.fsq_id.toString() === params.id; //dynamic id
+        return coffeeStore.id.toString() === params.id; //dynamic id
       }),
     },
   };
@@ -27,7 +27,7 @@ export async function getStaticPaths() {
   const paths = coffeeStores.map((coffeeStore:any) => {
     return {
       params: {
-        id: coffeeStore.fsq_id.toString(),
+        id: coffeeStore.id.toString(),
       },
     };
   });
@@ -43,7 +43,8 @@ const CoffeeStore = (props:any) => {
     return <div>Loading...</div>;
   }
 
-  const { location, name,  imgUrl } = props.coffeeStore;
+//  const { location, name,  imgUrl } = props.coffeeStore;
+const { name, address, neighbourhood, imgUrl } = props.coffeeStore;
 
   const handleUpvoteButton = () => {
     console.log("i m upvote button");
@@ -58,7 +59,7 @@ const CoffeeStore = (props:any) => {
         <div className={styles.col1}>
           <div className={styles.backToHomeLink}>
             <Link legacyBehavior href="/">
-              <a>Back to home</a>
+            <a>← Back to home</a>
             </Link>
           </div>
           <div className={styles.nameWrapper}>
@@ -77,19 +78,22 @@ const CoffeeStore = (props:any) => {
         </div>
 
         <div className={cls("glass", styles.col2)}>
+          {address && (
+            <div className={styles.iconWrapper}>
+              <Image src="/icons/places.svg" width="24" height="24"  alt="img"/>
+              <p className={styles.text}>{address}</p>
+            </div>
+          )}
+          {neighbourhood && (
+            <div className={styles.iconWrapper}>
+              <Image src="/icons/nearMe.svg" width="24" height="24" alt="img" />
+              <p className={styles.text}>{neighbourhood}</p>
+            </div>
+          )}
           <div className={styles.iconWrapper}>
-            <Image src="/icons/places.svg" width="24" height="24"  alt="img"/>
-            <p className={styles.text}>{location.address}</p>
-          </div>
-          <div className={styles.iconWrapper}>
-            <Image src="/icons/nearMe.svg" width="24" height="24"   alt="img"/>
-            <p className={styles.text}>{location.cross_street}</p>
-          </div>
-          <div className={styles.iconWrapper}>
-            <Image src="/icons/star.svg" width="24" height="24"  alt="img" />
+            <Image src="/icons/star.svg" width="24" height="24" alt="img" />
             <p className={styles.text}>1</p>
           </div>
-
           <button className={styles.upvoteButton} onClick={handleUpvoteButton}>
             Up vote!
           </button>
@@ -99,5 +103,4 @@ const CoffeeStore = (props:any) => {
   );
 };
 export default CoffeeStore;
-
 
