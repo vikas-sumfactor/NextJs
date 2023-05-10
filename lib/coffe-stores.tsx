@@ -1,9 +1,10 @@
 import { createApi } from 'unsplash-js';
+console.log(process.env.UNSPLASH_ACCESS_KEY, "about unspalsh");
 
-
+const abc:any = process.env.UNSPLASH_ACCESS_KEY
+console.log(abc);
 const unsplashApi = createApi({
-  accessKey: process.env.UNSPLASH_ACCESS_KEY ,
- 
+  accessKey: abc
 });
 
 // const unsplashApi = createApi({
