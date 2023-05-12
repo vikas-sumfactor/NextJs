@@ -24,7 +24,7 @@ const getListOfCoffeeStorePhotos = async () => {
   
   return unsplashResults.map((result:any) => result.urls["small"]);
 }; 
-export const fetchCoffeeStores = async ( latLong = "43.653833032607096%2C-79.37896808855945",limit = 6) => {
+export const fetchCoffeeStores = async ( latLong = "43.653833032607096%2C-79.37896808855945",limit =9) => {
   const photos = await getListOfCoffeeStorePhotos();
   const options:any = {
     method: "GET",
@@ -41,7 +41,7 @@ export const fetchCoffeeStores = async ( latLong = "43.653833032607096%2C-79.378
   return data.results.map((result:any, idx:any) => {
     const neighborhood = result.location.neighborhood;
     return {
-      id: result.fsq_id,
+      id: result.fsq_id, 
       address: result.location.address,
       name: result.name,
       neighbourhood: neighborhood?.length > 0 ? neighborhood[0] : "",
