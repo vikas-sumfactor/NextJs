@@ -19,9 +19,4 @@ d) pre fetch assests
 5) Serverless function :The function which takes the req and returns the response on the server but without hosting it on any server is basically a serverless function.
                            Inside the pages directory, craete api folder its contains serverless function.
                            
-6) Fast Refresh : detect changes/error instantly                           
-                           
-
-
-                                        
-                                       
+6) Fast Refresh : detect changes/error instantly
