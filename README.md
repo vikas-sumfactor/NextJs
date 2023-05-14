@@ -46,4 +46,4 @@ Types of Routing
   
   Linking between different routes: Next.js allows us to do client-side navigation using the Link component. 
                                     It has a property called href that points to a known page
-                
+              
