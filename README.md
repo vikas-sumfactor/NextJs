@@ -21,7 +21,7 @@ d) pre fetch assests
                            
 6) Fast Refresh : detect changes/error instantly  
 
-Start section-3 from here -
+# Start section-3 from here -
 # SetUp
 Step 1.
 
@@ -56,8 +56,6 @@ Run npm run dev or yarn dev or pnpm dev to start the development server on http:
 Visit http://localhost:3000 to view your application
 Edit pages/index.js and see the updated result in your browser
 
-
-
 # CSS Modules
 
 1)global.css: applicable for whole application.
@@ -72,36 +70,3 @@ CSS Modules locally scope CSS by automatically creating a unique class name. Thi
 syntax : 
 <div className={style.classname}>hello world</div>
 called as a object className={style.classname}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
