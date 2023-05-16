@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 
-import { ACTION_TYPES, StoreContext } from "../pages/_app";
+import { StoreContext,ACTION_TYPES } from "@/store/store-context";
 function userTrackLocation() {
     const [locationErrorMsg, setLocationErrorMsg] = useState("");
    // const [latLong, setLatLong] = useState("");

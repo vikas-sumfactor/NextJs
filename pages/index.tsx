@@ -7,7 +7,7 @@ import Card from '@/Components/Card'
 import  coffeeStoresData from "../data/coffestores.json"
 import { fetchCoffeeStores } from '../lib/coffe-stores'
 import useTrackLocation from '@/hooks/use-track-location'
-import { ACTION_TYPES, StoreContext } from "./_app";
+import { ACTION_TYPES, StoreContext } from "@/store/store-context"
 
 export async function getStaticProps(context:any) {
   console.log("hi getStaticProps");

@@ -1,18 +1,18 @@
+
+import { useContext, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Head from "next/head";
 import Image from "next/image";
-
 import cls from "classnames";
-
-// import coffeeStoresData from "../../data/coffestores.json";
-
 import styles from "../../styles/coffestore.module.css";
-import { fetchCoffeeStores } from "@/lib/coffe-stores";
+import { fetchCoffeeStores } from "../../lib/coffe-stores";
+import { StoreContext } from "../../store/store-context";
+import {isEmpty} from '../../utils/';
 
 export async function getStaticProps(staticProps:any) {
   const params = staticProps.params;
-  console.log("hi params", params);
+  console.log("params", params);
   const coffeeStores = await fetchCoffeeStores();
   const findCoffeeStoreById = coffeeStores.find((coffeeStore:any) => {
     return coffeeStore.id.toString() === params.id; //dynamic id
@@ -23,7 +23,6 @@ export async function getStaticProps(staticProps:any) {
     },
   };
 }
- 
 export async function getStaticPaths() {
   const coffeeStores = await fetchCoffeeStores();
   const paths = coffeeStores.map((coffeeStore:any) => {
@@ -36,22 +35,57 @@ export async function getStaticPaths() {
   return {
     paths,
     fallback: true,
-   
   };
 }
-const CoffeeStore = (props:any) => {
+const CoffeeStore = (initialProps:any) => {
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
+  const id = router.query.id;
+  const [coffeeStore, setCoffeeStore] = useState(initialProps.coffeeStore);
+  const {
+    state: { coffeeStores },
+  } = useContext(StoreContext);
 
-//  const { location, name,  imgUrl } = props.coffeeStore;
-const { name, address, neighbourhood, imgUrl } = props.coffeeStore;
+  const handleCreateCoffeeStore = async (coffeeStore:any) => {
+    try {
+      const { id, name, voting, ImgUrl, neighbourhood, address } = coffeeStore;
+      const response = await fetch("/api/createCoffeeStore", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id,
+          name,
+          voting: 0,
+          ImgUrl,
+          neighbourhood: neighbourhood || "",
+          address: address || "",
+        }),
+      });
 
-  const handleUpvoteButton = () => {
-    console.log("i m upvote button");
+      const dbCoffeeStore = await response.json();
+      console.log({ dbCoffeeStore });
+    } catch (err) {
+      console.error("Error creating coffee store", err);
+    }
   };
 
+  useEffect(() => {
+    if (isEmpty(initialProps.coffeeStore)) {
+      if (coffeeStores.length > 0) {
+        const findCoffeeStoreById = coffeeStores.find((coffeeStore:any) => {
+          return coffeeStore.id.toString() === id; //dynamic id
+        });
+        setCoffeeStore(findCoffeeStoreById);
+        handleCreateCoffeeStore(findCoffeeStoreById);
+      }
+    }
+  }, [id]);
+  const { name, address, neighbourhood, imgUrl } = coffeeStore;
+  const handleUpvoteButton = () => {};
   return (
     <div className={styles.layout}>
       <Head>
@@ -61,34 +95,33 @@ const { name, address, neighbourhood, imgUrl } = props.coffeeStore;
         <div className={styles.col1}>
           <div className={styles.backToHomeLink}>
             <Link legacyBehavior href="/">
-            <a>← Back to home</a>
+              <a>← Back to home</a>
             </Link>
           </div>
           <div className={styles.nameWrapper}>
             <h1 className={styles.name}>{name}</h1>
           </div>
           <Image
-           src={
-            imgUrl ||
-            "https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80"
-          }
-            width={360}
-            height={240}
+            src={
+              imgUrl ||
+              "https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80"
+            }
+            width={600}
+            height={360}
             className={styles.storeImg}
             alt={name}
           />
         </div>
-
         <div className={cls("glass", styles.col2)}>
           {address && (
             <div className={styles.iconWrapper}>
-              <Image src="/icons/places.svg" width="24" height="24"  alt="img"/>
+              <Image src="/icons/places.svg" width="24" height="24" alt="img" />
               <p className={styles.text}>{address}</p>
             </div>
           )}
           {neighbourhood && (
             <div className={styles.iconWrapper}>
-              <Image src="/icons/nearMe.svg" width="24" height="24" alt="img" />
+              <Image src="/icons/nearMe.svg" width="24" height="24" alt="img"/>
               <p className={styles.text}>{neighbourhood}</p>
             </div>
           )}
