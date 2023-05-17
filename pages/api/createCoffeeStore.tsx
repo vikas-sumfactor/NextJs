@@ -1,28 +1,25 @@
-import { table, getMinifiedRecords } from "@/lib/airtable";
-console.log({ table });
+import {table,getMinifiedRecords,findRecordByFilter} from "../../lib/airtable";
+
 const createCoffeeStore = async (req:any, res:any) => {
-  console.log({ req });
   if (req.method === "POST") {
+
+   const createCoffeeStore = async (req:any, res:any) => {
+  
     //find a record
-    const { id, name, neighbourhood, address, ImgUrl, voting } = req.body;
+    const { id, name, neighbourhood, address, imgUrl, voting } = req.body;
 
     try {
       if (id) {
-        const findCoffeeStoreRecords = await table
-          .select({
-            filterByFormula: `id="${id}"`,
-          })
-          .firstPage();
+        const records = await findRecordByFilter(id);
 
-        console.log({ findCoffeeStoreRecords });
-
-        if (findCoffeeStoreRecords.length !== 0) {
-          const records = getMinifiedRecords(findCoffeeStoreRecords);
-          
+        if (records.length !== 0) {
           res.json(records);
-        } 
-        else {
+        } else {
           //create a record
+
+   
+    
+  
           if (name) {
             const createRecords = await table.create([
               {
@@ -32,17 +29,15 @@ const createCoffeeStore = async (req:any, res:any) => {
                   address,
                   neighbourhood,
                   voting,
-                  ImgUrl,
+                  imgUrl,
                 },
               },
             ]);
-
-          
             const records = getMinifiedRecords(createRecords);
             res.json(records);
           } else {
             res.status(400);
-            res.json({ message: "name is missing" });
+            res.json({ message: "Id or name is missing" });
           }
         }
       } else {
@@ -55,6 +50,6 @@ const createCoffeeStore = async (req:any, res:any) => {
       res.json({ message: "Error creating or finding a store", err });
     }
   }
+}
 };
-
 export default createCoffeeStore;

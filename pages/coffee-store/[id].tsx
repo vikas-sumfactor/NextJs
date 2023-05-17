@@ -8,7 +8,9 @@ import cls from "classnames";
 import styles from "../../styles/coffestore.module.css";
 import { fetchCoffeeStores } from "../../lib/coffe-stores";
 import { StoreContext } from "../../store/store-context";
-import {isEmpty} from '../../utils/';
+import {isEmpty,fetcher} from '../../utils/';
+import useSWR from "swr";
+
 
 export async function getStaticProps(staticProps:any) {
   const params = staticProps.params;
@@ -50,7 +52,7 @@ const CoffeeStore = (initialProps:any) => {
 
   const handleCreateCoffeeStore = async (coffeeStore:any) => {
     try {
-      const { id, name, voting, ImgUrl, neighbourhood, address } = coffeeStore;
+      const { id, name, voting, imgUrl, neighbourhood, address } = coffeeStore;
       const response = await fetch("/api/createCoffeeStore", {
         method: "POST",
         headers: {
@@ -60,7 +62,7 @@ const CoffeeStore = (initialProps:any) => {
           id,
           name,
           voting: 0,
-          ImgUrl,
+          imgUrl,
           neighbourhood: neighbourhood || "",
           address: address || "",
         }),
@@ -83,9 +85,36 @@ const CoffeeStore = (initialProps:any) => {
         handleCreateCoffeeStore(findCoffeeStoreById);
       }
     }
-  }, [id]);
+
+ else {
+      // SSG
+      handleCreateCoffeeStore(initialProps.coffeeStore);
+    }
+  }, [id, initialProps.coffeeStore]);
   const { name, address, neighbourhood, imgUrl } = coffeeStore;
-  const handleUpvoteButton = () => {};
+  const[votingCount,setVotingCount] =useState(1);
+
+
+  const { data, error } = useSWR(`/api/getCoffeeStoreById?id=${id}`, fetcher);
+
+  useEffect(() => {
+    if (data && data.length > 0) {
+      console.log("data from SWR", data);
+      setCoffeeStore(data[0]);
+      setVotingCount(data[0].voting);
+    }
+  }, [data]);
+
+
+  const handleUpvoteButton = () => {
+  let count = votingCount+1;
+    setVotingCount(count);
+  };
+
+  if (error) {
+    return <div>Something went wrong retrieving coffee store page</div>;
+  }
+
   return (
     <div className={styles.layout}>
       <Head>
@@ -127,7 +156,7 @@ const CoffeeStore = (initialProps:any) => {
           )}
           <div className={styles.iconWrapper}>
             <Image src="/icons/star.svg" width="24" height="24" alt="img" />
-            <p className={styles.text}>1</p>
+            <p className={styles.text}>{votingCount}</p>
           </div>
           <button className={styles.upvoteButton} onClick={handleUpvoteButton}>
             Up vote!
@@ -138,4 +167,6 @@ const CoffeeStore = (initialProps:any) => {
   );
 };
 export default CoffeeStore;
+
+
 
