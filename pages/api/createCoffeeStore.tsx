@@ -3,7 +3,7 @@ import {table,getMinifiedRecords,findRecordByFilter} from "../../lib/airtable";
 const createCoffeeStore = async (req:any, res:any) => {
   if (req.method === "POST") {
 
-   const createCoffeeStore = async (req:any, res:any) => {
+ 
   
     //find a record
     const { id, name, neighbourhood, address, imgUrl, voting } = req.body;
@@ -50,6 +50,6 @@ const createCoffeeStore = async (req:any, res:any) => {
       res.json({ message: "Error creating or finding a store", err });
     }
   }
-}
 };
 export default createCoffeeStore;
+

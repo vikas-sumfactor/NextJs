@@ -24,3 +24,4 @@ const findRecordByFilter = async (id:any) => {
 };
 
 export { table, getMinifiedRecords, findRecordByFilter };
+
