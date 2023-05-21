@@ -4,7 +4,7 @@ import styles from '@/styles/Home.module.css'
 import Banner from '@/Components/Banner'
 import Image from 'next/image'
 import Card from '@/Components/Card'
-import  coffeeStoresData from "../data/coffestores.json"
+//import  coffeeStoresData from "../data/coffestores.json"
 import { fetchCoffeeStores } from '../lib/coffe-stores'
 import useTrackLocation from '@/hooks/use-track-location'
 import { ACTION_TYPES, StoreContext } from "@/store/store-context"
@@ -55,7 +55,7 @@ export default function Home(props:any) {
       }
     }
     setCoffeeStoresByLocation();
-  }, [latLong]);
+  }, [dispatch,latLong]);
 
   const handleOnBannerBtnClick = () => {
     console.log("hi banner button");
@@ -74,7 +74,7 @@ export default function Home(props:any) {
          {locationErrorMsg && <p>Something went wrong: {locationErrorMsg}</p>}
          {coffeeStoresError && <p>Something went wrong: {coffeeStoresError}</p>}
         <div className={styles.heroImage}>
-          <Image src="/hero-image.png" width={700} height={400} alt='img' />
+          <Image src="/hero-image.png" width={700} height={400} alt="hero image" />
         </div>
 
         {coffeeStores.length > 0 && (
