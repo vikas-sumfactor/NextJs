@@ -110,4 +110,80 @@ Types of Routing
   
   # Styling 
 https://nextjs.org/docs/pages/building-your-application/styling
+  
+  
+  # Section 6
+  
+  
+  # SEO
+
+Search engine optimization is the process of improving the quality and quantity of website traffic to a website or a web page from search engines.
+
+1) Crawling: “following your links”. A process which is done by search engine bots to discover publicly available web pages.
+
+2) Indexing: “adding webpages into Google search”. When search engine crawlers visit any link is crawling and when crawlers save or index 
+              that links in search engine database is called indexing.
+
+3) Ranking: Provide the pieces of content that will best answer a searcher's query, which means that results are ordered by most relevant to least relevant.
+  
+  
+  # Section 7
+  
+  # Project Component Architecture 
+
+# getStaticProps
+
+https://nextjs.org/docs/basic-features/data-fetching/get-static-props
+
+# getStaticPaths
+
+
+https://nextjs.org/docs/basic-features/data-fetching/get-static-paths
+
+# Falllback
+
+fallback false: return 404 page
+
+
+fallback true: find and load if found then show and if not show error
+
+  
+  # Section 8
+  
+  # GeoLocation API
+
+# Hooks
+  
+  
+  # Section 9
+  
+  Nextjs: full stack framework/React production framework.
+Nextjs allows render content on the server/client both.
+# Benefits of NextJs
+1) Different Rendering Techniques
+a) static site generation(blog type static data)
+b) server side rendering(dyanmic data comes from api and fetch)
+c) incremental site regeneration(static+server)=> best
+
+2) Performance
+a) code splitting: divide big code to small chunks and use particular to show on webpages
+b) minifying files: remove extraspace and charcters 
+c) image optimization: using next image component it make resposnive automatically
+d) pre fetch assests
+
+3) File Based Routing : When a file is added to the “pages” directory, it's automatically available as a route.
+                        no need of installing extra package like in react
+4) SEO
+5) Serverless function :The function which takes the req and returns the response on the server but without hosting it on any server is basically a serverless function.
+                           Inside the pages directory, craete api folder its contains serverless function.
+                           
+6) Fast Refresh : detect changes/error instantly   
+
+
+# REST API
+
+# Serverless Function
+
+
+                           
               
