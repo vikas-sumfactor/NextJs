@@ -183,6 +183,35 @@ d) pre fetch assests
 # REST API
 
 # Serverless Function
+  
+  
+  
+  # section 10
+  
+  
+  AirTable
+The Airtable API provides a simple way of accessing your data. Whether it's contacts, sales leads, inventory, applicant information or todo items, the vocabulary of the interactions closely matches your data structure. You will use your table names to address tables, column names to access data stored in those columns. In other words, the Airtable API is your own RESTful API for your base.
+  
+  
+  
+  # Section 11
+  
+  #SWR
+  
+  npm install swr
+  
+  
+  # section 12
+  
+    # NEXTJSAPP
+  1) npm run dev : for developement server
+  
+  2) npm run build => npm run start : for production server
+  
+  # cloud ready app
+  
+  # env variables:
+  we need to put key and values of our private data while depolying in env variables sections
 
 
                            
