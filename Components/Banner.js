@@ -2,7 +2,7 @@
 import styles from "styles/Banner.module.css"
 
 
-const Banner = (props:any) => {
+const Banner = (props) => {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>

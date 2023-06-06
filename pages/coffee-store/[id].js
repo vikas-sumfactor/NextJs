@@ -7,15 +7,15 @@ import cls from "classnames";
 import styles from "../../styles/coffestore.module.css";
 import { fetchCoffeeStores } from "../../lib/coffe-stores";
 import { StoreContext } from "../../store/store-context";
-import {isEmpty,fetcher} from '../../utils/';
+import {isEmpty,fetcher} from '../../utils';
 import useSWR from "swr";
 
 
-export async function getStaticProps(staticProps:any) {
+export async function getStaticProps(staticProps) {
   const params = staticProps.params;
   console.log("params", params);
   const coffeeStores = await fetchCoffeeStores();
-  const findCoffeeStoreById = coffeeStores.find((coffeeStore:any) => {
+  const findCoffeeStoreById = coffeeStores.find((coffeeStore) => {
     return coffeeStore.id.toString() === params.id; //dynamic id
   });
   return {
@@ -26,7 +26,7 @@ export async function getStaticProps(staticProps:any) {
 }
 export async function getStaticPaths() {
   const coffeeStores = await fetchCoffeeStores();
-  const paths = coffeeStores.map((coffeeStore:any) => {
+  const paths = coffeeStores.map((coffeeStore) => {
     return {
       params: {
         id: coffeeStore.id.toString(),
@@ -38,7 +38,7 @@ export async function getStaticPaths() {
     fallback: true,
   };
 }
-const CoffeeStore = (initialProps:any) => {
+const CoffeeStore = (initialProps) => {
   const router = useRouter();
  
   const id = router.query.id;
@@ -48,7 +48,7 @@ const CoffeeStore = (initialProps:any) => {
 
   const {state: { coffeeStores }} = useContext(StoreContext);
   
-  const handleCreateCoffeeStore = async (coffeeStore:any) => {
+  const handleCreateCoffeeStore = async (coffeeStore) => {
     try {
       const { id, name, voting, imgUrl, neighbourhood, address } = coffeeStore;
       const response = await fetch("/api/createCoffeeStore", {
@@ -75,7 +75,7 @@ const CoffeeStore = (initialProps:any) => {
   useEffect(() => {
     if (isEmpty(initialProps.coffeeStore)) {
       if (coffeeStores.length > 0) {
-        const findCoffeeStoreById = coffeeStores.find((coffeeStore:any) => {
+        const findCoffeeStoreById = coffeeStores.find((coffeeStore) => {
           return coffeeStore.id.toString() === id; //dynamic id
         });
         setCoffeeStore(findCoffeeStoreById);

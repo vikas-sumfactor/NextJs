@@ -9,7 +9,7 @@ import { fetchCoffeeStores } from '../lib/coffe-stores'
 import useTrackLocation from '@/hooks/use-track-location'
 import { ACTION_TYPES, StoreContext } from "@/store/store-context"
 
-export async function getStaticProps(context:any) {
+export async function getStaticProps(context) {
   console.log("hi getStaticProps");
   const coffeeStores = await fetchCoffeeStores();
 
@@ -20,7 +20,7 @@ export async function getStaticProps(context:any) {
     }, // will be passed to the page component as props
   };
 }
-export default function Home(props:any) {
+export default function Home(props) {
   console.log("props", props);
 
 
@@ -47,7 +47,7 @@ export default function Home(props:any) {
               coffeeStores,
             },
           });
-        } catch (error:any) {
+        } catch (error) {
           //set error
           console.log("Error", { error });
           setCoffeeStoresError(error.message);
@@ -81,7 +81,7 @@ export default function Home(props:any) {
           <div className={styles.sectionWrapper}>
             <h2 className={styles.heading2}>Stores near me</h2>
             <div className={styles.cardLayout}>
-              {coffeeStores.map((coffeeStore:any) => {
+              {coffeeStores.map((coffeeStore) => {
                 return (
                   <Card
                     key={coffeeStore.id}
@@ -105,7 +105,7 @@ export default function Home(props:any) {
             <>
               <h2 className={styles.heading2}>Toronto stores</h2>
               <div className={styles.cardLayout}>
-                {props.coffeeStores.map((coffeeStore:any) => {
+                {props.coffeeStores.map((coffeeStore) => {
                   return (
                     <Card
                       key={coffeeStore.id}

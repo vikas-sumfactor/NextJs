@@ -1,6 +1,6 @@
 import { findRecordByFilter } from "../../lib/airtable";
 
-const getCoffeeStoreById = async (req:any, res:any) => {
+const getCoffeeStoreById = async (req, res) => {
   const { id } = req.query;
 
   try {

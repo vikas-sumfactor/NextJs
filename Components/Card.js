@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import styles from "styles/card.module.css";
 
-const Card = (props:any) => {
+const Card = (props) => {
   return (
     <Link legacyBehavior href={props.href}>
       <a className={styles.cardLink}>

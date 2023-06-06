@@ -5,7 +5,7 @@
 // }
 // export default favouriteCoffeeStoreById;
 import { table, findRecordByFilter, getMinifiedRecords } from "../../lib/airtable";
-const favouriteCoffeeStoreById = async (req:any, res:any) => {
+const favouriteCoffeeStoreById = async (req, res) => {
     if (req.method === 'PUT') {
         try {
             const { id } = req.body;
